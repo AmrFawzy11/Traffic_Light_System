@@ -26,7 +26,7 @@ void Setflag(void);
 
 
 int main(void){
-
+	/* initialize our peripherals (LEDs , LCD and EXTi) */
 	init();
 
 	while(1)
