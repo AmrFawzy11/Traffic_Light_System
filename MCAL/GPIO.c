@@ -21,6 +21,7 @@ void DIO_SetPortDir(uint8 PORT_ID,uint8 direction)
 		DDRC = 	direction;						break;
 	case DIO_PORTD:
 		DDRD = 	direction;						break;
+	default:									break;
 	}
 }
 
@@ -68,6 +69,7 @@ void DIO_SetPinDir(uint8 PORT_ID,uint8 PIN_ID,uint8 direction)
 			CLEAR_BIT(DDRD,PIN_ID);
 		}
 		break;
+	default:									break;
 	}
 }
 
@@ -83,6 +85,7 @@ void DIO_SetPortVal(uint8 PORT_ID,uint8 value)
 		PORTC = value;					 		break;
 	case DIO_PORTD:
 		PORTD = value;					 		break;
+	default:									break;
 	}
 }
 
@@ -130,6 +133,7 @@ void DIO_SetPinVal(uint8 PORT_ID,uint8 PIN_ID,uint8 value)
 			CLEAR_BIT(PORTD,PIN_ID);
 		}
 		break;
+	default:									break;
 	}
 }
 void DIO_ReadPort(uint8 PORT_ID,uint8* val)
@@ -144,6 +148,7 @@ void DIO_ReadPort(uint8 PORT_ID,uint8* val)
 		*val = PINC; 							break;
 	case DIO_PORTD:
 		*val = PIND; 							break;
+	default:									break;
 	}
 
 }
@@ -160,6 +165,7 @@ void DIO_ReadPin(uint8 PORT_ID,uint8 PIN_ID,uint8* val)
 		*val = GET_BIT(PINC,PIN_ID); 			break;
 	case DIO_PORTD:
 		*val = GET_BIT(PIND,PIN_ID); 			break;
+	default:									break;
 	}
 }
 
@@ -176,6 +182,7 @@ void DIO_TogglePin(uint8 PORT_ID, uint8 PIN_ID)
 		TOGGLE_BIT(PORTC,PIN_ID); 				break;
 	case DIO_PORTD:
 		TOGGLE_BIT(PORTD,PIN_ID); 				break;
+	default:									break;
 	}
 
 }

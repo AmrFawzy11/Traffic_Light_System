@@ -19,10 +19,6 @@ void LCD_Init(void)
 
 	_delay_ms(20);
 
-#if(LCD_MODE == 8)
-
-
-#elif(LCD_MODE == 4)
 	DIO_SetPinDir(LCD_DATA_PORTID,LCD_D4,DIO_PIN_OUTPUT);
 	DIO_SetPinDir(LCD_DATA_PORTID,LCD_D5,DIO_PIN_OUTPUT);
 	DIO_SetPinDir(LCD_DATA_PORTID,LCD_D6,DIO_PIN_OUTPUT);
@@ -34,7 +30,6 @@ void LCD_Init(void)
 	LCD_WriteCommand(LCD_TWO_LINES_FOUR_BITS_MODE);
 
 
-#endif
 	LCD_WriteCommand(LCD_CURSOR_OFF);
 	LCD_WriteCommand(LCD_CLEAR_COMMAND);
 	LCD_WriteCommand(0x0F);
@@ -42,11 +37,6 @@ void LCD_Init(void)
 
 void LCD_WriteCommand(uint8 cmd)
 {
-
-#if(LCD_MODE == 8)
-
-
-#elif(LCD_MODE == 4)
 
 	DIO_SetPinVal(LCD_CMD_PORTID,LCD_RS,LOGIC_LOW);
 	_delay_ms(1);
@@ -74,7 +64,6 @@ void LCD_WriteCommand(uint8 cmd)
 
 	DIO_SetPinVal(LCD_CMD_PORTID,LCD_EN,LOGIC_LOW);
 
-#endif
 
 }
 

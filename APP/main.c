@@ -13,8 +13,6 @@
 #include "EXTI.h"
 
 
-#define DELAY_IN_SEC(s)  4*s
-
 int skip_delay = 0 ;
 int Cars_mode = 0;
 int button_pressed = 0 ;
@@ -24,6 +22,9 @@ void init(void);
 void Yellow_Blink(void);
 void Setflag(void);
 
+uint8 DELAY_IN_SEC(uint8 s){
+	return 4*s;
+}
 
 int main(void){
 
@@ -33,12 +34,12 @@ int main(void){
 	{
 		skip_delay = 0 ;
 
-		if(button_pressed)
+		if(button_pressed==1)
 		{
 			App();
 		}
 
-		else if(isGreen_ON())
+		else if(isGreen_ON()==1)
 		{
 			letGreen_OFF();
 			Yellow_Blink();
@@ -46,13 +47,13 @@ int main(void){
 			skip_delay = 1;
 		}
 
-		else if(isYellow_ON())
+		else if(isYellow_ON()==1)
 		{
 			letYellow_OFF();
 			letRed_ON();
 		}
 
-		else if(isRed_ON())
+		else if(isRed_ON()==1)
 		{
 			letRed_OFF();
 			letGreen_ON();
@@ -63,27 +64,34 @@ int main(void){
 
 		}
 
-
-		for(int i=0 ; i<DELAY_IN_SEC(5) ; i++){
+        uint8 i;
+		for( i=0 ; i<DELAY_IN_SEC(5) ; i++){
 			if(skip_delay || button_pressed)
+			{
 				break ;
-			_delay_ms(250);
+			}
+			else
+			{
+				_delay_ms(250);
+
+			}
 		}
 	}
 }
 void App(void){
 
 
-	if(isGreen_ON()){
+	if(isGreen_ON()==1){
 		letGreen_OFF();
 		Yellow_Blink();
 		letYellow_OFF();
 	}
 
-	else if(isYellow_ON()){
+	else if(isYellow_ON()==1){
 		Yellow_Blink();
 		letYellow_OFF();
 	}
+	else{}
 
 	letRed_ON();
 	letBlue_ON();
@@ -124,14 +132,20 @@ void Yellow_Blink(void)
 	uint8 i;
 	for(i = 0 ; i<DELAY_IN_SEC(5);i++)
 	{
-		if(skip_delay)
+		if(skip_delay==1)
+		{
 			break;
+		}
 
-		if(isYellow_ON())
-		letYellow_OFF();
+		else if(isYellow_ON()==1){
+			letYellow_OFF();
+		}
 
-		else if(!isYellow_ON())
+		else if(isYellow_ON()==0)
+		{
 			letYellow_ON();
+		}
+		else{}
 
 		_delay_ms(250);
 	}
